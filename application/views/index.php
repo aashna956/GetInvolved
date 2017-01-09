@@ -1306,7 +1306,7 @@
 			var dataString = '&fname='+ fname + '&lname='+ lname + '&city='+ city + '&state='+ state + '&email='+ r_email + '&password='+ r_password + '&mobile='+ pnumber;
 			
 			$('.pageloadeing').css('display','block');
-			
+			console.log("before ajax");
 			
 			$.ajax({
 					type: "POST",
@@ -1316,6 +1316,7 @@
 					success: function(result){
 							if(result)
 							{
+								console.log("inside");
 								$('.pageloadeing').css('display','none');
 								/*$(".ptext1").html('Congratulation. You have sucessfully Signed Up.'); */
 								$(".ptext1").html('You have successfully registered. A verification mail has been sent to your email'); 
@@ -1325,6 +1326,7 @@
 							}
 							else
 							{
+								console.log("inside1");
 								$('.pageloadeing').css('display','none');
 								$(".ptext1").html('This email is already in use. Please enter different email address'); 
 								$("#openModalpopup1").css('display','block'); 
@@ -1332,8 +1334,13 @@
 								return false;
 
 							}
+					},
+					error: function(result) {
+						console.log("something was off");
+						console.log(result);
 					}
 				});
+				console.log("after ajax");
 				return false;
 		}
 

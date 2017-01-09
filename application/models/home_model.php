@@ -109,7 +109,7 @@ class Home_model extends CI_Model {
     { 	
 		$this->db->where("email",$this->input->post('email'));
         $query=$this->db->get("users");
-		
+
         if($query->num_rows()>0)
         {
 			
@@ -191,7 +191,6 @@ class Home_model extends CI_Model {
 		$insertId = $this->db->insert_id();
 		if(!empty($insertId) && $insertId!='0')
 		{			
-			
 			/*$newdata = array(
 					'user_name'  => $this->input->post('fname')." ".$this->input->post('lname'),
                     'user_id'  => $insertId,

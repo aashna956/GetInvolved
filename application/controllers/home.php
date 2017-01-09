@@ -58,7 +58,7 @@ class Home extends CI_Controller {
 			$result = $this->home_model->register_process($confirmation_id);
 			if($result!='0' && $result!='')
 			{
-				$this->load->library('email');
+/*				$this->load->library('email');
 
             $config['protocol']    = 'smtp';
 
@@ -96,7 +96,7 @@ class Home extends CI_Controller {
 			$this -> email -> message($message);
 
 			$this -> email -> send();
-			
+		*/	
 			echo $result;
 			}
 		}
