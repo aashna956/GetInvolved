@@ -7,12 +7,14 @@ class Forum extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->helper('form');
-		//$this -> load -> model('home_model');
+		$this -> load -> model('forum_model');
 	}
 	public function index()
 	{	
 		$data['title'] = 'Get Involved';
 		$data['active'] = 'active_link';
+		$data['categories'] = $this->forum_model->getForumCategories(); 
+		//$data['posts'] = $this->forum_model->getPosts(); 
 		//$data['sliders'] = $this->home_model->getSlideListing();
 		//$data['causes'] = $this->home_model->getCauseshome();
 		//$data['causes_gallery'] = $this->home_model->getCausesGallery();
