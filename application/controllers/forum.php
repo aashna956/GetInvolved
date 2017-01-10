@@ -13,13 +13,16 @@ class Forum extends CI_Controller {
 	{	
 		$data['title'] = 'Get Involved';
 		$data['active'] = 'active_link';
-		$data['categories'] = $this->forum_model->getForumCategories(); 
-		//$data['posts'] = $this->forum_model->getPosts(); 
-		//$data['sliders'] = $this->home_model->getSlideListing();
-		//$data['causes'] = $this->home_model->getCauseshome();
-		//$data['causes_gallery'] = $this->home_model->getCausesGallery();
-		//$data['cause_members'] = $this->home_model->getAllCausesMembers();
-		//$data['about_us'] = $this->home_model->getAboutUsContent();
+		$data['categories'] = $this->forum_model->getForumCategories();
+		/* 
+		POSTS is an associative array that maps a category to the posts for that category.
+		E.g. posts[General] = [GeneralPost1, GeneralPost2]
+		*/
+		$posts = array();
+		foreach ($data['categories'] as $category_data) {
+			$posts[$category_data->category] = $this->forum_model->getPosts($category_data->cat_id);
+		}
+		$data['posts'] = $posts;
 		$data['login_action'] = '1';
 		//$data['users'] = $this->home_model->getUsersDetails();
 		if($this->session->userdata('user_id') && $this->session->userdata('user_id')!='')
