@@ -47,4 +47,17 @@ class Forum extends CI_Controller {
 			echo $result;
 		}
 	}
+
+	public function viewpost($post_id)
+	{
+		$post_info = $this->forum_model->getPost($post_id);
+		$data['title'] = $post_info->title;
+		$data['content'] = $post_info->content;
+		$data['author'] = $post_info->user_id;
+		$data['category'] = $post_info->cat_id;
+		$data['timestamp'] = $post_info->datetime;
+		$this->load->view('includes/header',$data);
+		$this->load->view('forum_post',$data);
+		$this->load->view('includes/footer');
+	}
 }

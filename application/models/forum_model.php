@@ -40,5 +40,14 @@ class Forum_model extends CI_Model {
 		return false;
 	}
 
+	function getPost($post_id)
+	{
+		// need to do some inner joins here
+		$this->db->where("post_id", $post_id);
+		$query = $this->db->get("posts");
+		$result = $query->result();
+		return $result[0];
+	}
+
 }
 ?>

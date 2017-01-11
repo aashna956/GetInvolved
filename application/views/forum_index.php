@@ -82,7 +82,7 @@ function open_modal(category) {
                             foreach($category_post as $post_data) {
                 ?>
                 <li class="post">
-                    <div class="post-title"><a href="#"><?= $post_data->title ?></a></div>
+                    <div class="post-title"><a href="<?= base_url()?>forum/viewpost/<?= $post_data->post_id ?>"><?= $post_data->title ?></a></div>
                     <div class="post-content"><?= $post_data->content ?></div>
                 </li>
                 <?php
