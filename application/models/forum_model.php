@@ -19,6 +19,26 @@ class Forum_model extends CI_Model {
 		return $query->result();
 	}
 
+	function addPost()
+	{
+		$this->db->where("category",$this->input->post('cat'));
+		$query=$this->db->get("forum_categories");
+		$category=$query->result();
+
+		$data = array(
+				'title'=>$this->input->post('title'),
+				'content'=>$this->input->post('content'),
+				'cat_id'=>$category[0]->cat_id,
+				'user_id'=>$this -> session -> userdata('user_id')
+			);
+		$this->db->insert('posts',$data);
+		$insertId = $this->db->insert_id();
+		if(!empty($insertId) && $insertId!='0')
+		{
+			return true;
+		}
+		return false;
+	}
 
 }
 ?>

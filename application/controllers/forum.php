@@ -39,9 +39,12 @@ class Forum extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 
-	public function newpost($category)
+	public function newpost()
 	{
-		$data['category'] = $category;
-		$this->load->view('forum_newpost', $data);
+		$result = $this->forum_model->addPost();
+		if($result!='0' && $result!='')
+		{
+			echo $result;
+		}
 	}
 }

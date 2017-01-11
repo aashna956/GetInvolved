@@ -144,16 +144,50 @@ function open_modal(category) {
             <label>Category</label>
             <select id="cat-select" name="post_category" class="form-control">
                 <?php foreach($categories as $category_data) { ?>
-                <option value='$category_data->cat_id'><?= $category_data->category ?></option>
+                <option value='<?= $category_data->category ?>'><?= $category_data->category ?></option>
                 <?php } ?>
             </select>
-            <label>Topic Title</label>
-            <input type="text" class="form-control" name="title"required>
+            <label>Post Title</label>
+            <input id="new-post-title" type="text" class="form-control" name="title" required>
             <label>Content</label>
-            <textarea name="content"class="form-control">
-            </textarea>
+            <textarea id="new-post-content" name="content" class="form-control"></textarea>
             <br>
-            <a class="pull-right post-button" href="#">POST</a>
-           </form>
+            <input type="button" class="pull-right post-button" onclick="newpost_process()" value="POST">
+        </form>
     </div>
 </div>
+<script>
+function newpost_process()
+{
+    var post_category = $('#cat-select').val();
+    var post_title = $('#new-post-title').val();
+    var post_content = $('#new-post-content').val();
+
+    var dataString = '&cat='+ post_category + '&title='+ post_title + '&content='+ post_content;
+
+    $('.pageloadeing').css('display','block');
+    console.log("before ajax");
+
+    $.ajax({
+            type: "POST",
+            url: '<?=base_url()?>forum/newpost',
+            data: dataString,
+            cache: false,
+            success: function(result){
+                if(result)
+                {
+                    console.log("inside");
+                    $('.pageloadeing').css('display','none');
+                    window.location.href='<?=base_url()?>forum/index';
+                    return false;
+                }
+            },
+            error: function(result) {
+                console.log("something was off");
+                console.log(result);
+            }
+        });
+        console.log("after ajax");
+        return false;
+}
+</script>
