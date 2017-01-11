@@ -33,9 +33,16 @@ body {
 .post-title a:hover {
     color: #8A0C10;
 }
+a {
+    color: #000000;
+}
+a:hover {
+    color: #8A0C10;  
+}
+
 </style>
 <script>
-$(document).ready(function() {
+$(window).load(function() {
     $(".post-content").text(function(index, currentText) {
         if(currentText.length > 150)
             return currentText.substr(0, 150) + "....";
@@ -43,6 +50,12 @@ $(document).ready(function() {
             return currentText;
     });
 });
+function open_modal(category) {
+    console.log(category);
+    //$("#category").append(category);
+    $("#cat-select").val(category);
+    return false;
+}
 </script>
 <div class="container" style="margin:2% auto;">
     <h4>Latest Discussion</h4>
@@ -55,8 +68,11 @@ $(document).ready(function() {
     ?>
     <div class="panel panel-success bootstrap-override">
         <div class="panel-heading bootstrap-override">
-            <h3 class="panel-title"><?= $category_data->category ?></h3>
+            <h3 class="panel-title" style="float:left;"><?= $category_data->category ?></h3>
+            <a href="#new-post" style="float:right" id="new-post-button" onclick="open_modal('<?= $category_data->category ?>')">New Post <span class="glyphicon glyphicon-pencil"></span></a>
+            <div class="clearfix"></div>
         </div> 
+
         <div class="panel-body">
             <ul class="posts-list">
                 <?php
@@ -81,4 +97,63 @@ $(document).ready(function() {
         }
     ?>
       
+    </div>
+</div>
+<style type="text/css">
+#new-post
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity: 0;
+    -webkit-transition: opacity 100ms ease-in;
+    -moz-transition: opacity 100ms ease-in;
+    transition: opacity 100ms ease-in;
+    pointer-events: none;
+}
+#new-post > div
+{
+    width: 40%;
+    height: 55%;
+    margin: 5% auto;
+    background: #fff;
+    padding: 10px;
+}
+
+#new-post:target
+{
+    opacity: 1;
+    pointer-events: auto;
+}
+.post-button
+{
+    font-weight: bolder;
+    font-size: 16px;
+    color: #C02025;
+}
+</style>
+<div id="new-post">
+    <div>
+        <a href="" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+        <div class="clearfix"></div>
+        <form method="" id="new-post-form">
+            <label>Category</label>
+            <select id="cat-select" name="post_category" class="form-control">
+                <?php foreach($categories as $category_data) { ?>
+                <option value='$category_data->cat_id'><?= $category_data->category ?></option>
+                <?php } ?>
+            </select>
+            <label>Topic Title</label>
+            <input type="text" class="form-control" name="title"required>
+            <label>Content</label>
+            <textarea name="content"class="form-control">
+            </textarea>
+            <br>
+            <a class="pull-right post-button" href="#">POST</a>
+           </form>
+    </div>
 </div>

@@ -38,4 +38,10 @@ class Forum extends CI_Controller {
 		$this->load->view('forum_index',$data);
 		$this->load->view('includes/footer');
 	}
+
+	public function newpost($category)
+	{
+		$data['category'] = $category;
+		$this->load->view('forum_newpost', $data);
+	}
 }
