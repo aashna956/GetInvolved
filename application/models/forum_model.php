@@ -43,10 +43,24 @@ class Forum_model extends CI_Model {
 	function getPost($post_id)
 	{
 		// need to do some inner joins here
+		$this->db->select('*');
+		$this->db->from('posts');
 		$this->db->where("post_id", $post_id);
-		$query = $this->db->get("posts");
+
+		$this->db->join('forum_categories', 'forum_categories.cat_id = posts.cat_id');
+		$this->db->join('users', 'users.id = posts.user_id');
+		$query = $this->db->get();
 		$result = $query->result();
 		return $result[0];
+	}
+
+	function getComments($post_id) {
+		$this->db->select('*');
+		$this->db->from('comments');
+		$this->db->where("post_id", $post_id);
+		$this->db->join('users', 'users.id = comments.user_id');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 }

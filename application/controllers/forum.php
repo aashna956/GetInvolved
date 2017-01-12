@@ -53,9 +53,11 @@ class Forum extends CI_Controller {
 		$post_info = $this->forum_model->getPost($post_id);
 		$data['title'] = $post_info->title;
 		$data['content'] = $post_info->content;
-		$data['author'] = $post_info->user_id;
-		$data['category'] = $post_info->cat_id;
+		$data['author_fname'] = $post_info->fname;
+		$data['author_lname'] = $post_info->lname;
+		$data['category'] = $post_info->category;
 		$data['timestamp'] = $post_info->datetime;
+		$data['comments'] = $this->forum_model->getComments($post_id);
 		$this->load->view('includes/header',$data);
 		$this->load->view('forum_post',$data);
 		$this->load->view('includes/footer');
