@@ -57,9 +57,19 @@ class Forum extends CI_Controller {
 		$data['author_lname'] = $post_info->lname;
 		$data['category'] = $post_info->category;
 		$data['timestamp'] = $post_info->datetime;
+		$data['post_id'] = $post_id;
 		$data['comments'] = $this->forum_model->getComments($post_id);
 		$this->load->view('includes/header',$data);
 		$this->load->view('forum_post',$data);
 		$this->load->view('includes/footer');
+	}
+
+	public function newcomment()
+	{
+		$result = $this->forum_model->addComment();
+		if($result!='0' && $result!='')
+		{
+			echo $result;
+		}
 	}
 }

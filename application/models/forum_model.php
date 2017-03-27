@@ -63,5 +63,20 @@ class Forum_model extends CI_Model {
 		return $query->result();
 	}
 
+	function addComment()
+	{
+		$data = array(
+				'comment'=>$this->input->post('comment'),
+				'post_id'=>$this->input->post('post_id'),
+				'user_id'=>$this -> session -> userdata('user_id')
+			);
+		$this->db->insert('comments',$data);
+		$insertId = $this->db->insert_id();
+		if(!empty($insertId) && $insertId!='0')
+		{
+			return true;
+		}
+		return false;		
+	}
 }
 ?>

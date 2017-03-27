@@ -7,7 +7,7 @@ body {
     border-radius: 0;
 }
 .panel-heading.bootstrap-override {
-    background-color: #DED7D7;
+    background-color: #E6E7E8;
     color: #000000;
     border-radius: 0;
     border: none;
@@ -19,7 +19,7 @@ body {
 }
 .post {
     padding: 10px;
-    background-color: #DED7D7;
+    background-color: #E6E7E8;
     border-bottom: 1px dotted #000000;
 }
 .post:last-child {
@@ -134,12 +134,15 @@ function open_modal(category) {
     font-weight: bolder;
     font-size: 16px;
     color: #C02025;
+    border: none;
+    background-color: white;
 }
 </style>
 <div id="new-post">
     <div>
         <a href="" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
         <div class="clearfix"></div>
+        <?php if($this->session->userdata('user_id') && $this->session->userdata('user_id')!='') { ?>
         <form method="" id="new-post-form">
             <label>Category</label>
             <select id="cat-select" name="post_category" class="form-control">
@@ -154,6 +157,10 @@ function open_modal(category) {
             <br>
             <input type="button" class="pull-right post-button" onclick="newpost_process()" value="POST">
         </form>
+        <?php } else { ?>
+        <h3>You need to be logged in to post</h3>
+        <!-- add the same login as the home page over here -->
+        <?php } ?>
     </div>
 </div>
 <script>

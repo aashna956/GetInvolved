@@ -359,16 +359,16 @@
                     <ul class="nav navbar-nav">
                         <li class="scroll <?=($active && $active!='')?'active':''?>"><a href="#home">HOME</a></li>
 						<li class="scroll"><a href="<?=base_url()?>#aboutus">ABOUT US</a></li>
-                        <li class="scroll"><a href="#how_it_work">HOW IT WORKS</a></li>
-                        <li class="scroll"><a href="#portfolio">WALKABOUT</a></li>
-                        <li class="scroll"><a href="#about123">GALLERY</a></li>
-                        <li class="scroll"><a href="#">FORUM</a></li>
+                        <li class="scroll"><a href="<?=base_url()?>#how_it_work">HOW IT WORKS</a></li>
+                        <li class="scroll"><a href="<?=base_url()?>#portfolio">WALKABOUT</a></li>
+                        <li class="scroll"><a href="<?=base_url()?>#about123">GALLERY</a></li>
+                        <li class="scroll"><a href="<?=base_url()?>forum">FORUM</a></li>
 						<?php
 							if (($this -> session -> userdata('user_id') == "")) 
 							{
 						?>
 								<li class="scroll">
-									<a href="#get-in-touch" style="border-right:none;">LOGIN</a>
+									<a href="<?=base_url()?>#get-in-touch" style="border-right:none;">LOGIN</a>
 								</li>                        
 						<?php
 							}
